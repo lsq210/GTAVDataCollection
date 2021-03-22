@@ -35,16 +35,18 @@ namespace GTAVUtils
                 return Max.Y - Min.Y;
             }
         }
+        public bool IsValid { set; get; }
     }
 
     public class ROI
     {
-        public ROI(Entity entity, DetectionType detectionType, int originImageWidth, int originImageHeight)
+        public ROI(Entity entity, DetectionType detectionType, int order, int originImageWidth, int originImageHeight)
         {
             RoIEntity = entity;
             Pos = new Vector3(entity.Position.X, entity.Position.Y, entity.Position.Z);
             BBox = GTAVData.ComputeBoundingBox(entity);
             Type = detectionType;
+            Order = order;
             OriginImageWidth = originImageWidth;
             OriginImageHeight = originImageHeight;
         }
@@ -88,6 +90,8 @@ namespace GTAVUtils
 
         public int OriginImageHeight { get; }
 
+        public int Order { get;  }
+
         private int GetWidth(float w)
         {
             return (int)(w * OriginImageWidth);
@@ -105,7 +109,7 @@ namespace GTAVUtils
 
         public string Serialize(bool autoCrlf = false)
         {
-            string data = $"{GetWidth(BBox.Min.X)},{GetHeight(BBox.Min.Y)},{GetWidth(BBox.Max.X)},{GetHeight(BBox.Max.Y)},{Type}";
+            string data = $"{Order},{GetWidth(BBox.Min.X)},{GetHeight(BBox.Min.Y)},{GetWidth(BBox.Max.X)},{GetHeight(BBox.Max.Y)},{Type}";
             if (!autoCrlf)
             {
                 return data;
@@ -118,6 +122,7 @@ namespace GTAVUtils
             Pen pen = new Pen(Color.Red);
             Graphics g = Graphics.FromImage(image);
             g.DrawRectangle(pen, GetWidth(BBox.Min.X), GetHeight(BBox.Min.Y), GetWidth(BBox.Width), GetHeight(BBox.Height));
+            g.DrawString($"{Order}", SystemFonts.DefaultFont, Brushes.Red, GetWidth(BBox.Min.X), GetHeight(BBox.Max.Y));
         }
     }
 
@@ -148,22 +153,31 @@ namespace GTAVUtils
                 var cornerVector = new Vector3(corner.X, corner.Y, corner.Z);
 
                 cornerVector = entity.GetOffsetPosition(cornerVector);
-                var position = HashFunctions.Convert3dTo2d(cornerVector);
-                if (position.X == -1f || position.Y == -1f)
+                Vector2 position = HashFunctions.Convert3dTo2d(cornerVector);
+
+                if (position.X == .1f || position.Y == .1f || position.X == .9f || position.Y == .9f)
                 {
                     return new GTABoundingBox2
                     {
                         Min = new Vector2(float.PositiveInfinity, float.PositiveInfinity),
-                        Max = new Vector2(float.NegativeInfinity, float.NegativeInfinity)
+                        Max = new Vector2(float.NegativeInfinity, float.NegativeInfinity),
+                        IsValid = false
                     };
                 }
 
                 res = new GTABoundingBox2
                 {
                     Min = new Vector2(Math.Min(res.Min.X, position.X), Math.Min(res.Min.Y, position.Y)),
-                    Max = new Vector2(Math.Max(res.Max.X, position.X), Math.Max(res.Max.Y, position.Y))
+                    Max = new Vector2(Math.Max(res.Max.X, position.X), Math.Max(res.Max.Y, position.Y)),
+                    IsValid = true
                 };
             }
+
+            if (res.Max.X == res.Min.X || res.Max.Y == res.Min.Y)
+            {
+                res.IsValid = false;
+            }
+
             return res;
         }
 
@@ -191,7 +205,7 @@ namespace GTAVUtils
         {
             GTAVManager.SaveImage(imagePath, Image);
 
-            string txt = "";
+            string txt = $"{Image.Width},{Image.Height}\n";
             for (int i = 0; i < RoIs.Length; i++)
             {
                 txt += RoIs[i].Serialize(true);
