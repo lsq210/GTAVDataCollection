@@ -106,7 +106,6 @@ namespace GTAVUtils
             return HashFunctions.CheckVisible(RoIEntity);
         }
 
-
         public string Serialize(bool autoCrlf = false)
         {
             string data = $"{Order},{GetWidth(BBox.Min.X)},{GetHeight(BBox.Min.Y)},{GetWidth(BBox.Max.X)},{GetHeight(BBox.Max.Y)},{Type}";
