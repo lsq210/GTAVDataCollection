@@ -200,21 +200,21 @@ namespace GTAVUtils
 
         public ROI[] RoIs;
 
-        public void Save(string imagePath, string labelPath, bool drawBBox = true)
+        public void Save(string imageName, string labelName, bool drawBBox = true)
         {
-            GTAVManager.SaveImage(imagePath, Image);
+            GTAVManager.SaveImage(imageName, Image);
 
             string txt = $"{Image.Width},{Image.Height}\n";
             for (int i = 0; i < RoIs.Length; i++)
             {
                 txt += RoIs[i].Serialize(true);
             }
-            GTAVManager.SaveTxt(labelPath, txt);
+            GTAVManager.SaveTxt(labelName, txt);
 
             if (drawBBox)
             {
                 Draw();
-                GTAVManager.SaveImage($"bbox/{Path.GetFileNameWithoutExtension(imagePath)}", Image);
+                GTAVManager.SaveImage($"bbox/{Path.GetFileNameWithoutExtension(imageName)}", Image);
             }
 
             GTAVManager.Commit();
