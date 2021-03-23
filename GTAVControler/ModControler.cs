@@ -43,11 +43,6 @@ namespace GTAVControler
             {
                 Automation.Resume();
             }
-
-            if (e.KeyCode == Keys.N)
-            {
-
-            }
         }
     }
 }
