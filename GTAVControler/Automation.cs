@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Drawing;
+using System.Windows.Forms;
 using GTA;
-using GTA.Math;
 
 namespace GTAVControler
 {
@@ -14,7 +14,7 @@ namespace GTAVControler
             foreach (Vehicle vehicle in vehicles)
             {
                 GTAVUtils.ROI roi = new GTAVUtils.ROI(vehicle, (GTAVUtils.ROI.DetectionType)vehicle.ClassType, rois.Count, width, height);
-                if (roi.BBox.IsValid && roi.CheckVisible(vehicle))
+                if (roi.CheckVisible() || true)
                 {
                     rois.Add(roi);
                 }
@@ -35,7 +35,7 @@ namespace GTAVControler
             Bitmap screenshot = GTAVUtils.Common.GetScreenshot();
 
             // label
-            GTAVUtils.ROI[] labels = GetRoIs(screenshot.Width, screenshot.Height);
+            GTAVUtils.ROI[] labels = GetRoIs(Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height);
 
             // save data
             new GTAVUtils.GTAVData(GTAVUtils.Common.CutScreenshot(screenshot), GTAVUtils.Common.FilterRoIs(labels)).Save(timestamp, timestamp);

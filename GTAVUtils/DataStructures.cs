@@ -11,6 +11,12 @@ namespace GTAVUtils
 {
     public class GTABoundingBox2
     {
+        public enum DataQuality
+        {
+            High = 1,
+            Middle = 2,
+            Low = 3
+        }
         public Vector2 Min { get; set; }
         public Vector2 Max { get; set; }
         public float Area
@@ -37,6 +43,57 @@ namespace GTAVUtils
             }
         }
         public bool IsValid { set; get; }
+
+        public DataQuality Quality { set; get; }
+
+        public static GTABoundingBox2 ComputeBoundingBox(Entity entity)
+        {
+            var m = entity.Model;
+            (Vector3 gmin, Vector3 gmax) = m.Dimensions;
+
+            var bbox = new SharpDX.BoundingBox(new SharpDX.Vector3(gmin.X, gmin.Y, gmin.Z), new SharpDX.Vector3(gmax.X, gmax.Y, gmax.Z));
+
+            var res = new GTABoundingBox2
+            {
+                Min = new Vector2(float.PositiveInfinity, float.PositiveInfinity),
+                Max = new Vector2(float.NegativeInfinity, float.NegativeInfinity)
+            };
+
+            foreach (var corner in bbox.GetCorners())
+            {
+                var cornerVector = new Vector3(corner.X, corner.Y, corner.Z);
+
+                cornerVector = entity.GetOffsetPosition(cornerVector);
+                Vector2 position = HashFunctions.Convert3dTo2d(cornerVector);
+
+                if (position.X == .1f || position.Y == .1f || position.X == .9f || position.Y == .9f)
+                {
+                    return new GTABoundingBox2
+                    {
+                        Min = new Vector2(float.PositiveInfinity, float.PositiveInfinity),
+                        Max = new Vector2(float.NegativeInfinity, float.NegativeInfinity),
+                        IsValid = false,
+                        Quality = DataQuality.Low
+                    };
+                }
+
+                res = new GTABoundingBox2
+                {
+                    Min = new Vector2(Math.Min(res.Min.X, position.X), Math.Min(res.Min.Y, position.Y)),
+                    Max = new Vector2(Math.Max(res.Max.X, position.X), Math.Max(res.Max.Y, position.Y)),
+                    IsValid = true,
+                    Quality = DataQuality.High
+                };
+            }
+
+            if (res.Max.X == res.Min.X || res.Max.Y == res.Min.Y)
+            {
+                res.IsValid = false;
+                res.Quality = DataQuality.Low;
+            }
+
+            return res;
+        }
     }
 
     public class ROI
@@ -45,7 +102,7 @@ namespace GTAVUtils
         {
             RoIEntity = entity;
             Pos = new Vector3(entity.Position.X, entity.Position.Y, entity.Position.Z);
-            BBox = GTAVData.ComputeBoundingBox(entity);
+            BBox = GTABoundingBox2.ComputeBoundingBox(entity);
             Type = detectionType;
             Order = order;
             OriginImageWidth = originImageWidth;
@@ -102,28 +159,24 @@ namespace GTAVUtils
             return (int)(h * OriginImageHeight);
         }
 
-        //public bool CheckVisible()
-        //{
-        //    return HashFunctions.CheckVisible(RoIEntity);
-        //}
-
-        public bool CheckVisible(Vehicle vehicle)
+        public bool CheckVisible()
         {
-            bool didHit = false; //相机和载具连线是否被其他实体挡住
+            bool didHit = false; // 相机和载具连线是否被其他实体挡住
             Vector3 cameraPos = World.RenderingCamera.Position;
             Vector3 sourcePos = new Vector3(cameraPos.X, cameraPos.Y, cameraPos.Z - 0.5f) + World.RenderingCamera.ForwardVector.Normalized;
-            Vector3 targetPos = vehicle.Position;
+            Vector3 targetPos = RoIEntity.Position;
             var res = World.Raycast(sourcePos, targetPos, IntersectFlags.Everything, null);
             if (res.DidHit)
             {
                 didHit = true;
+                BBox.Quality = GTABoundingBox2.DataQuality.Middle;
             }
             return !didHit;
         }
 
         public string Serialize(bool autoCrlf = false)
         {
-            string data = $"{Order},{GetWidth(BBox.Min.X)},{GetHeight(BBox.Min.Y)},{GetWidth(BBox.Max.X)},{GetHeight(BBox.Max.Y)},{Type}";
+            string data = $"{Order},{GetWidth(BBox.Min.X)},{GetHeight(BBox.Min.Y)},{GetWidth(BBox.Max.X)},{GetHeight(BBox.Max.Y)},{Type},{BBox.Quality}";
             if (!autoCrlf)
             {
                 return data;
@@ -133,10 +186,23 @@ namespace GTAVUtils
 
         public void Draw(Bitmap image)
         {
-            Pen pen = new Pen(Color.Red);
+            Color color = Color.Black;
+            switch (BBox.Quality)
+            {
+                case GTABoundingBox2.DataQuality.High:
+                    color = Color.Green;
+                    break;
+                case GTABoundingBox2.DataQuality.Middle:
+                    color = Color.Yellow;
+                    break;
+                case GTABoundingBox2.DataQuality.Low:
+                    color = Color.Red;
+                    break;
+            }
+            Pen pen = new Pen(color);
             Graphics g = Graphics.FromImage(image);
             g.DrawRectangle(pen, GetWidth(BBox.Min.X), GetHeight(BBox.Min.Y), GetWidth(BBox.Width), GetHeight(BBox.Height));
-            g.DrawString($"{Order}", SystemFonts.DefaultFont, Brushes.Red, GetWidth(BBox.Min.X), GetHeight(BBox.Max.Y));
+            g.DrawString($"{Order}", SystemFonts.DefaultFont, new SolidBrush(color), GetWidth(BBox.Min.X), GetHeight(BBox.Max.Y));
         }
     }
 
@@ -147,52 +213,6 @@ namespace GTAVUtils
             Version = "v0.0.1";
             Image = image;
             RoIs = rois;
-        }
-
-        public static GTABoundingBox2 ComputeBoundingBox(Entity entity)
-        {
-            var m = entity.Model;
-            (Vector3 gmin, Vector3 gmax) = m.Dimensions;
-
-            var bbox = new SharpDX.BoundingBox(new SharpDX.Vector3(gmin.X, gmin.Y, gmin.Z), new SharpDX.Vector3(gmax.X, gmax.Y, gmax.Z));
-
-            var res = new GTABoundingBox2
-            {
-                Min = new Vector2(float.PositiveInfinity, float.PositiveInfinity),
-                Max = new Vector2(float.NegativeInfinity, float.NegativeInfinity)
-            };
-
-            foreach (var corner in bbox.GetCorners())
-            {
-                var cornerVector = new Vector3(corner.X, corner.Y, corner.Z);
-
-                cornerVector = entity.GetOffsetPosition(cornerVector);
-                Vector2 position = HashFunctions.Convert3dTo2d(cornerVector);
-
-                if (position.X == .1f || position.Y == .1f || position.X == .9f || position.Y == .9f)
-                {
-                    return new GTABoundingBox2
-                    {
-                        Min = new Vector2(float.PositiveInfinity, float.PositiveInfinity),
-                        Max = new Vector2(float.NegativeInfinity, float.NegativeInfinity),
-                        IsValid = false
-                    };
-                }
-
-                res = new GTABoundingBox2
-                {
-                    Min = new Vector2(Math.Min(res.Min.X, position.X), Math.Min(res.Min.Y, position.Y)),
-                    Max = new Vector2(Math.Max(res.Max.X, position.X), Math.Max(res.Max.Y, position.Y)),
-                    IsValid = true
-                };
-            }
-
-            if (res.Max.X == res.Min.X || res.Max.Y == res.Min.Y)
-            {
-                res.IsValid = false;
-            }
-
-            return res;
         }
 
         public string Version { get; set; }
