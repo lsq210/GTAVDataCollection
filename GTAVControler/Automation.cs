@@ -38,7 +38,7 @@ namespace GTAVControler
             GTAVUtils.ROI[] labels = GetRoIs(screenshot.Width, screenshot.Height);
 
             // save data
-            new GTAVUtils.GTAVData(screenshot, labels).Save(timestamp, timestamp);
+            new GTAVUtils.GTAVData(GTAVUtils.Common.CutScreenshot(screenshot), GTAVUtils.Common.FilterRoIs(labels)).Save(timestamp, timestamp);
         }
 
         public static void Pause()
