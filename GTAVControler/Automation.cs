@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Drawing;
 using GTA;
+using GTA.Math;
 
 namespace GTAVControler
 {
@@ -8,13 +9,12 @@ namespace GTAVControler
     {
         private static GTAVUtils.ROI[] GetRoIs(int width, int height)
         {
-            
             Vehicle[] vehicles = World.GetAllVehicles();
             List<GTAVUtils.ROI> rois = new List<GTAVUtils.ROI>();
             foreach (Vehicle vehicle in vehicles)
             {
                 GTAVUtils.ROI roi = new GTAVUtils.ROI(vehicle, (GTAVUtils.ROI.DetectionType)vehicle.ClassType, rois.Count, width, height);
-                if (roi.BBox.IsValid && roi.CheckVisible())
+                if (roi.BBox.IsValid && roi.CheckVisible(vehicle))
                 {
                     rois.Add(roi);
                 }

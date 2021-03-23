@@ -5,6 +5,7 @@ using DataManager;
 using Vector2 = GTA.Math.Vector2;
 using Vector3 = GTA.Math.Vector3;
 using Entity = GTA.Entity;
+using GTA;
 
 namespace GTAVUtils
 {
@@ -101,9 +102,23 @@ namespace GTAVUtils
             return (int)(h * OriginImageHeight);
         }
 
-        public bool CheckVisible()
+        //public bool CheckVisible()
+        //{
+        //    return HashFunctions.CheckVisible(RoIEntity);
+        //}
+
+        public bool CheckVisible(Vehicle vehicle)
         {
-            return HashFunctions.CheckVisible(RoIEntity);
+            bool didHit = false; //相机和载具连线是否被其他实体挡住
+            Vector3 cameraPos = World.RenderingCamera.Position;
+            Vector3 sourcePos = new Vector3(cameraPos.X, cameraPos.Y, cameraPos.Z - 0.5f) + World.RenderingCamera.ForwardVector.Normalized;
+            Vector3 targetPos = vehicle.Position;
+            var res = World.Raycast(sourcePos, targetPos, IntersectFlags.Everything, null);
+            if (res.DidHit)
+            {
+                didHit = true;
+            }
+            return !didHit;
         }
 
         public string Serialize(bool autoCrlf = false)
