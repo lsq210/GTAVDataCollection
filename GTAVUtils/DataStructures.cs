@@ -45,9 +45,8 @@ namespace GTAVUtils
         public bool IsValid {
             get
             {
-                return true;
-                // TODO: @lsq210
-                // return Quality == DataQuality.High;
+                //return true;
+                return Quality == DataQuality.High;
             }
         }
 

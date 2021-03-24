@@ -39,7 +39,6 @@ namespace GTAVControler
 
             // preprocess and save data
             GTAVUtils.Common.DataPreprocess(screenshot, rois).Save(timestamp, timestamp);
-            // new GTAVUtils.GTAVData(screenshot, rois).Save(timestamp, timestamp);
         }
 
         public static void Pause()
