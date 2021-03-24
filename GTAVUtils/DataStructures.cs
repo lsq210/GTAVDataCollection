@@ -98,15 +98,26 @@ namespace GTAVUtils
 
     public class ROI
     {
-        public ROI(Entity entity, DetectionType detectionType, int order, int originImageWidth, int originImageHeight)
+        public ROI(Entity entity, DetectionType detectionType, int order, int imageWidth, int imageHeight)
         {
             RoIEntity = entity;
             Pos = new Vector3(entity.Position.X, entity.Position.Y, entity.Position.Z);
             BBox = GTABoundingBox2.ComputeBoundingBox(entity);
             Type = detectionType;
             Order = order;
-            OriginImageWidth = originImageWidth;
-            OriginImageHeight = originImageHeight;
+            ImageWidth = imageWidth;
+            ImageHeight = imageHeight;
+        }
+
+        public ROI(ROI preROI)
+        {
+            RoIEntity = preROI.RoIEntity;
+            Pos = preROI.Pos;
+            BBox = preROI.BBox;
+            Type = preROI.Type;
+            Order = preROI.Order;
+            ImageWidth = preROI.ImageWidth;
+            ImageHeight = preROI.ImageHeight;
         }
 
         public enum DetectionType
@@ -136,7 +147,7 @@ namespace GTAVUtils
             OpenWheel = 22
         }
 
-        private Entity RoIEntity { get; }
+        public Entity RoIEntity { get; }
 
         public Vector3 Pos { get; }
 
@@ -144,19 +155,19 @@ namespace GTAVUtils
 
         public DetectionType Type { get; }
 
-        public int OriginImageWidth { get; }
+        public int ImageWidth { get; set; }
 
-        public int OriginImageHeight { get; }
+        public int ImageHeight { get; set; }
 
         public int Order { get;  }
 
         private int GetWidth(float w)
         {
-            return (int)(w * OriginImageWidth);
+            return (int)(w * ImageWidth);
         }
         private int GetHeight(float h)
         {
-            return (int)(h * OriginImageHeight);
+            return (int)(h * ImageHeight);
         }
 
         public bool CheckVisible()

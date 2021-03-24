@@ -34,11 +34,12 @@ namespace GTAVControler
             // screenshot
             Bitmap screenshot = GTAVUtils.Common.GetScreenshot();
 
-            // label
-            GTAVUtils.ROI[] labels = GetRoIs(Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height);
+            // roilabel
+            GTAVUtils.ROI[] rois = GetRoIs(screenshot.Width, screenshot.Height);
 
-            // save data
-            new GTAVUtils.GTAVData(GTAVUtils.Common.CutScreenshot(screenshot), GTAVUtils.Common.FilterRoIs(labels)).Save(timestamp, timestamp);
+            // preprocess and save data
+            //GTAVUtils.Common.DataPreprocess(screenshot, rois).Save(timestamp, timestamp);
+            new GTAVUtils.GTAVData(screenshot, rois).Save(timestamp, timestamp);
         }
 
         public static void Pause()
