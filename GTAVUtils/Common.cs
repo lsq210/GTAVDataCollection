@@ -18,9 +18,11 @@ namespace GTAVUtils
 
         public static GTAVData DataPreprocess(Bitmap screenshot, ROI[] RoIs)
         {
+            float cutBorderWidth = .1f;
+
             // cutImage
-            int cutWidth = (int)(screenshot.Width * 0.1);
-            int cutHeight = (int)(screenshot.Height * 0.1);
+            int cutWidth = (int)(screenshot.Width * cutBorderWidth);
+            int cutHeight = (int)(screenshot.Height * cutBorderWidth);
             Rectangle rect = new Rectangle(cutWidth, cutHeight, screenshot.Width - 2 * cutWidth, screenshot.Height - 2 * cutHeight);
             Bitmap cutedScreenshot = screenshot.Clone(rect, System.Drawing.Imaging.PixelFormat.DontCare);
 
@@ -33,15 +35,15 @@ namespace GTAVUtils
                     ImageWidth = cutedScreenshot.Width,
                     ImageHeight = cutedScreenshot.Height
                 };
-                float ratio = roi.ImageWidth / filteredRoI.ImageWidth;
-                if(roi.BBox.Quality != GTABoundingBox2.DataQuality.Low)
+                float ratio = roi.ImageWidth / (float)filteredRoI.ImageWidth;
+                if (roi.BBox.Quality != GTABoundingBox2.DataQuality.Low)
                 {
-                    if (roi.BBox.Min.X > 0.1 && roi.BBox.Min.Y > 0.1)
+                    if (roi.BBox.Min.X > cutBorderWidth && roi.BBox.Min.Y > cutBorderWidth)
                     {
-                        if (roi.BBox.Max.X < 0.9 && roi.BBox.Max.Y < 0.9)
+                        if (roi.BBox.Max.X < (1 - cutBorderWidth) && roi.BBox.Max.Y < (1 - cutBorderWidth))
                         {
-                            filteredRoI.BBox.Min = new GTA.Math.Vector2((roi.BBox.Min.X - .1f) * ratio, (roi.BBox.Min.Y - .1f) * ratio);
-                            filteredRoI.BBox.Max = new GTA.Math.Vector2((roi.BBox.Max.X - .1f) * ratio, (roi.BBox.Max.Y - .1f) * ratio);
+                            filteredRoI.BBox.Min = new GTA.Math.Vector2((roi.BBox.Min.X - cutBorderWidth) * ratio, (roi.BBox.Min.Y - cutBorderWidth) * ratio);
+                            filteredRoI.BBox.Max = new GTA.Math.Vector2((roi.BBox.Max.X - cutBorderWidth) * ratio, (roi.BBox.Max.Y - cutBorderWidth) * ratio);
                             filteredRoIs.Add(filteredRoI);
                         }
                     }

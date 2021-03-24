@@ -42,7 +42,14 @@ namespace GTAVUtils
                 return Max.Y - Min.Y;
             }
         }
-        public bool IsValid { set; get; }
+        public bool IsValid {
+            get
+            {
+                return true;
+                // TODO: @lsq210
+                // return Quality == DataQuality.High;
+            }
+        }
 
         public DataQuality Quality { set; get; }
 
@@ -72,7 +79,6 @@ namespace GTAVUtils
                     {
                         Min = new Vector2(float.PositiveInfinity, float.PositiveInfinity),
                         Max = new Vector2(float.NegativeInfinity, float.NegativeInfinity),
-                        IsValid = false,
                         Quality = DataQuality.Low
                     };
                 }
@@ -81,14 +87,12 @@ namespace GTAVUtils
                 {
                     Min = new Vector2(Math.Min(res.Min.X, position.X), Math.Min(res.Min.Y, position.Y)),
                     Max = new Vector2(Math.Max(res.Max.X, position.X), Math.Max(res.Max.Y, position.Y)),
-                    IsValid = true,
                     Quality = DataQuality.High
                 };
             }
 
             if (res.Max.X == res.Min.X || res.Max.Y == res.Min.Y)
             {
-                res.IsValid = false;
                 res.Quality = DataQuality.Low;
             }
 
@@ -103,6 +107,9 @@ namespace GTAVUtils
             RoIEntity = entity;
             Pos = new Vector3(entity.Position.X, entity.Position.Y, entity.Position.Z);
             BBox = GTABoundingBox2.ComputeBoundingBox(entity);
+            if (!CheckVisible()) {
+                BBox.Quality = GTABoundingBox2.DataQuality.Middle;
+            }
             Type = detectionType;
             Order = order;
             ImageWidth = imageWidth;
@@ -172,17 +179,11 @@ namespace GTAVUtils
 
         public bool CheckVisible()
         {
-            bool didHit = false; // 相机和载具连线是否被其他实体挡住
             Vector3 cameraPos = World.RenderingCamera.Position;
             Vector3 sourcePos = new Vector3(cameraPos.X, cameraPos.Y, cameraPos.Z - 0.5f) + World.RenderingCamera.ForwardVector.Normalized;
             Vector3 targetPos = RoIEntity.Position;
             var res = World.Raycast(sourcePos, targetPos, IntersectFlags.Everything, null);
-            if (res.DidHit)
-            {
-                didHit = true;
-                BBox.Quality = GTABoundingBox2.DataQuality.Middle;
-            }
-            return !didHit;
+            return !res.DidHit;
         }
 
         public string Serialize(bool autoCrlf = false)

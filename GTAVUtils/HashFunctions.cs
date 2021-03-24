@@ -13,14 +13,5 @@ namespace GTAVUtils
             Function.Call<bool>(Hash._GET_SCREEN_COORD_FROM_WORLD_COORD, pos.X, pos.Y, pos.Z, resX, resY);
             return new Vector2(resX.GetResult<float>(), resY.GetResult<float>());
         }
-
-        public static bool CheckVisible(Entity entity)
-        {
-            return true;
-            // Camera camera = World.RenderingCamera;
-            // Model m = new Model(VehicleHash.Airbus);
-            // Vehicle cameraVehicle = World.CreateVehicle(m, camera.Position);
-            // return Function.Call<bool>((Hash)0x0267D00AF114F17A, cameraVehicle, entity);
-        }
     }
 }

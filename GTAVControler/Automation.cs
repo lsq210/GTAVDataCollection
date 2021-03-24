@@ -14,7 +14,7 @@ namespace GTAVControler
             foreach (Vehicle vehicle in vehicles)
             {
                 GTAVUtils.ROI roi = new GTAVUtils.ROI(vehicle, (GTAVUtils.ROI.DetectionType)vehicle.ClassType, rois.Count, width, height);
-                if (roi.CheckVisible() || true)
+                if (roi.BBox.IsValid)
                 {
                     rois.Add(roi);
                 }
@@ -38,8 +38,8 @@ namespace GTAVControler
             GTAVUtils.ROI[] rois = GetRoIs(screenshot.Width, screenshot.Height);
 
             // preprocess and save data
-            //GTAVUtils.Common.DataPreprocess(screenshot, rois).Save(timestamp, timestamp);
-            new GTAVUtils.GTAVData(screenshot, rois).Save(timestamp, timestamp);
+            GTAVUtils.Common.DataPreprocess(screenshot, rois).Save(timestamp, timestamp);
+            // new GTAVUtils.GTAVData(screenshot, rois).Save(timestamp, timestamp);
         }
 
         public static void Pause()
