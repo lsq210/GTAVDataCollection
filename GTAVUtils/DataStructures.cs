@@ -101,7 +101,7 @@ namespace GTAVUtils
 
     public class ROI
     {
-        public ROI(Entity entity, DetectionType detectionType, int order, int imageWidth, int imageHeight)
+        public ROI(Entity entity, DetectionType detectionType, bool isBigVehicle, int order, int imageWidth, int imageHeight)
         {
             RoIEntity = entity;
             Pos = new Vector3(entity.Position.X, entity.Position.Y, entity.Position.Z);
@@ -110,6 +110,7 @@ namespace GTAVUtils
                 BBox.Quality = GTABoundingBox2.DataQuality.Middle;
             }
             Type = detectionType;
+            IsBigVehicle = isBigVehicle;
             Order = order;
             ImageWidth = imageWidth;
             ImageHeight = imageHeight;
@@ -121,6 +122,7 @@ namespace GTAVUtils
             Pos = preROI.Pos;
             BBox = preROI.BBox;
             Type = preROI.Type;
+            IsBigVehicle = preROI.IsBigVehicle;
             Order = preROI.Order;
             ImageWidth = preROI.ImageWidth;
             ImageHeight = preROI.ImageHeight;
@@ -161,6 +163,8 @@ namespace GTAVUtils
 
         public DetectionType Type { get; }
 
+        public bool IsBigVehicle { get; }
+
         public int ImageWidth { get; set; }
 
         public int ImageHeight { get; set; }
@@ -187,7 +191,8 @@ namespace GTAVUtils
 
         public string Serialize(bool autoCrlf = false)
         {
-            string data = $"{Order},{GetWidth(BBox.Min.X)},{GetHeight(BBox.Min.Y)},{GetWidth(BBox.Max.X)},{GetHeight(BBox.Max.Y)},{Type},{BBox.Quality}";
+            string vehicleSize = IsBigVehicle ? "large-vehicle" : "small-vehicle";
+            string data = $"{Order},{GetWidth(BBox.Min.X)},{GetHeight(BBox.Min.Y)},{GetWidth(BBox.Max.X)},{GetHeight(BBox.Max.Y)},{Type},{vehicleSize},{BBox.Quality}";
             if (!autoCrlf)
             {
                 return data;
@@ -197,18 +202,27 @@ namespace GTAVUtils
 
         public void Draw(Bitmap image)
         {
+
             Color color = Color.Black;
-            switch (BBox.Quality)
+            //switch (BBox.Quality)
+            //{
+            //    case GTABoundingBox2.DataQuality.High:
+            //        color = Color.Green;
+            //        break;
+            //    case GTABoundingBox2.DataQuality.Middle:
+            //        color = Color.Yellow;
+            //        break;
+            //    case GTABoundingBox2.DataQuality.Low:
+            //        color = Color.Red;
+            //        break;
+            //}
+            if (IsBigVehicle)
             {
-                case GTABoundingBox2.DataQuality.High:
-                    color = Color.Green;
-                    break;
-                case GTABoundingBox2.DataQuality.Middle:
-                    color = Color.Yellow;
-                    break;
-                case GTABoundingBox2.DataQuality.Low:
-                    color = Color.Red;
-                    break;
+                color = Color.Green;
+            }
+            else
+            {
+                color = Color.Red;
             }
             Pen pen = new Pen(color);
             Graphics g = Graphics.FromImage(image);

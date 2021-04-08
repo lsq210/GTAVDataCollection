@@ -13,7 +13,7 @@ namespace GTAVControler
             List<GTAVUtils.ROI> rois = new List<GTAVUtils.ROI>();
             foreach (Vehicle vehicle in vehicles)
             {
-                GTAVUtils.ROI roi = new GTAVUtils.ROI(vehicle, (GTAVUtils.ROI.DetectionType)vehicle.ClassType, rois.Count, width, height);
+                GTAVUtils.ROI roi = new GTAVUtils.ROI(vehicle, (GTAVUtils.ROI.DetectionType)vehicle.ClassType, vehicle.Model.IsBigVehicle,rois.Count, width, height);
                 if (roi.BBox.IsValid)
                 {
                     rois.Add(roi);
