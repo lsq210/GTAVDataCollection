@@ -213,7 +213,7 @@ namespace GTAVUtils
             Pen pen = new Pen(color);
             Graphics g = Graphics.FromImage(image);
             g.DrawRectangle(pen, GetWidth(BBox.Min.X), GetHeight(BBox.Min.Y), GetWidth(BBox.Width), GetHeight(BBox.Height));
-            g.DrawString($"{Order}", SystemFonts.DefaultFont, new SolidBrush(color), GetWidth(BBox.Min.X), GetHeight(BBox.Max.Y));
+            g.DrawString($"{Order}:{Type}", SystemFonts.DefaultFont, new SolidBrush(color), GetWidth(BBox.Min.X), GetHeight(BBox.Max.Y));
         }
     }
 
