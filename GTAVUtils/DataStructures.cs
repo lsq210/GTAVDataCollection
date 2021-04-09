@@ -101,7 +101,7 @@ namespace GTAVUtils
 
     public class ROI
     {
-        public ROI(Entity entity, DetectionType detectionType, bool isBigVehicle, int order, int imageWidth, int imageHeight)
+        public ROI(Entity entity, DetectionType detectionType, bool isBigVehicle, int order, int imageWidth, int imageHeight, Vector3 camPos, Vector3 camRot)
         {
             RoIEntity = entity;
             Pos = new Vector3(entity.Position.X, entity.Position.Y, entity.Position.Z);
@@ -114,6 +114,8 @@ namespace GTAVUtils
             Order = order;
             ImageWidth = imageWidth;
             ImageHeight = imageHeight;
+            CamPos = camPos;
+            CamRot = camRot;
         }
 
         public ROI(ROI preROI)
@@ -126,6 +128,8 @@ namespace GTAVUtils
             Order = preROI.Order;
             ImageWidth = preROI.ImageWidth;
             ImageHeight = preROI.ImageHeight;
+            CamPos = preROI.CamPos;
+            CamRot = preROI.CamRot;
         }
 
         public enum DetectionType
@@ -168,6 +172,10 @@ namespace GTAVUtils
         public int ImageWidth { get; set; }
 
         public int ImageHeight { get; set; }
+
+        public Vector3 CamPos { get; }
+
+        public Vector3 CamRot { get; }
 
         public int Order { get;  }
 
@@ -263,8 +271,9 @@ namespace GTAVUtils
         public void Save(string imageName, string labelName, bool drawBBox = true)
         {
             GTAVManager.SaveImage(imageName, Image);
-
-            string txt = $"{Image.Width},{Image.Height}\n";
+            string imageSize = $"{Image.Width},{Image.Height}";
+            string camInfo = $"{RoIs[0].CamPos},{RoIs[0].CamRot}";
+            string txt = $"{imageSize}\n{camInfo}\n";
             for (int i = 0; i < RoIs.Length; i++)
             {
                 txt += RoIs[i].Serialize(true);

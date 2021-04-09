@@ -2,6 +2,8 @@
 using System.Drawing;
 using System.Windows.Forms;
 using GTA;
+using Vector3 = GTA.Math.Vector3;
+
 
 namespace GTAVControler
 {
@@ -9,11 +11,13 @@ namespace GTAVControler
     {
         private static GTAVUtils.ROI[] GetRoIs(int width, int height)
         {
+            Vector3 camPos = World.RenderingCamera.Position;
+            Vector3 camRot = World.RenderingCamera.Rotation;
             Vehicle[] vehicles = World.GetAllVehicles();
             List<GTAVUtils.ROI> rois = new List<GTAVUtils.ROI>();
             foreach (Vehicle vehicle in vehicles)
             {
-                GTAVUtils.ROI roi = new GTAVUtils.ROI(vehicle, (GTAVUtils.ROI.DetectionType)vehicle.ClassType, vehicle.Model.IsBigVehicle,rois.Count, width, height);
+                GTAVUtils.ROI roi = new GTAVUtils.ROI(vehicle, (GTAVUtils.ROI.DetectionType)vehicle.ClassType, vehicle.Model.IsBigVehicle,rois.Count, width, height, camPos, camRot);
                 if (roi.BBox.IsValid)
                 {
                     rois.Add(roi);

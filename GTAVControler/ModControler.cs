@@ -11,7 +11,7 @@ namespace GTAVControler
         public Cotroler()
         {
             Tick += OnTick;
-            Interval = 4000;
+            Interval = 5000;
             KeyDown += OnKeyDown;
             Automation.Prepare();
         }
@@ -21,7 +21,7 @@ namespace GTAVControler
             if (this.enableAutoSaveScreenshot)
             {
                 Automation.Pause();
-                System.Threading.Thread.Sleep(2000);
+                System.Threading.Thread.Sleep(3000);
                 Automation.SaveGTAVData();
                 Automation.Resume();
             }
