@@ -5,8 +5,8 @@ GTAVDataCollection is a mod to extract synthetic data from Grand Theft Auto V.  
 ![demo image](resources/bbox.jpg)
 
 ## Requirements
-- [ScriptHookV]([Script Hook V - AB Software Development (dev-c.com)](http://www.dev-c.com/gtav/scripthookv/))
-- [ScriptHookVDotNet]([Releases · crosire/scripthookvdotnet (github.com)](https://github.com/crosire/scripthookvdotnet/releases))
+- [ScriptHookV](http://www.dev-c.com/gtav/scripthookv/)
+- [ScriptHookVDotNet](https://github.com/crosire/scripthookvdotnet/releases)
 - [Scripted Camera Tool](https://www.gta5-mods.com/scripts/scripted-camera-tool-1-0)
 - [Visual Studio 2019](https://visualstudio.microsoft.com/vs)
 - [.NET Framework ≥ 4.8](https://www.visualstudio.com/cs/downloads/)
