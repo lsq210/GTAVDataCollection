@@ -2,6 +2,7 @@
 using System.Drawing;
 using System.Windows.Forms;
 using System.Collections.Generic;
+using GTA.Math;
 
 namespace GTAVUtils
 {
@@ -16,7 +17,7 @@ namespace GTAVUtils
             return screenshot;
         }
 
-        public static GTAVData DataPreprocess(Bitmap screenshot, ROI[] RoIs)
+        public static GTAVData DataPreprocess(Bitmap screenshot, ROI[] RoIs, ImageInfo imageInfo)
         {
             float cutBorderWidth = .1f;
 
@@ -25,17 +26,18 @@ namespace GTAVUtils
             int cutHeight = (int)(screenshot.Height * cutBorderWidth);
             Rectangle rect = new Rectangle(cutWidth, cutHeight, screenshot.Width - 2 * cutWidth, screenshot.Height - 2 * cutHeight);
             Bitmap cutedScreenshot = screenshot.Clone(rect, System.Drawing.Imaging.PixelFormat.DontCare);
+            ImageInfo cutedImageInfo = new ImageInfo(imageInfo)
+            {
+                Width = cutedScreenshot.Width,
+                Height = cutedScreenshot.Height
+            };
 
             // filterRoIs
             List<ROI> filteredRoIs = new List<ROI>();
             foreach (ROI roi in RoIs)
             {
-                ROI filteredRoI = new ROI(roi)
-                {
-                    ImageWidth = cutedScreenshot.Width,
-                    ImageHeight = cutedScreenshot.Height
-                };
-                float ratio = roi.ImageWidth / (float)filteredRoI.ImageWidth;
+                ROI filteredRoI = new ROI(roi);
+                float ratio = imageInfo.Width / (float)cutedImageInfo.Width;
                 if (roi.BBox.Quality != GTABoundingBox2.DataQuality.Low)
                 {
                     if (roi.BBox.Min.X > cutBorderWidth && roi.BBox.Min.Y > cutBorderWidth)
@@ -49,7 +51,7 @@ namespace GTAVUtils
                     }
                 }
             }
-            return new GTAVData(cutedScreenshot, filteredRoIs.ToArray());
+            return new GTAVData(cutedScreenshot, filteredRoIs.ToArray(), imageInfo);
         }
     }
 }
