@@ -36,8 +36,11 @@ namespace GTAVUtils
             List<ROI> filteredRoIs = new List<ROI>();
             foreach (ROI roi in RoIs)
             {
-                ROI filteredRoI = new ROI(roi);
-                float ratio = imageInfo.Width / (float)cutedImageInfo.Width;
+                ROI filteredRoI = new ROI(roi)
+                {
+                    ImageInfo = cutedImageInfo
+                };
+                float ratio = (float)imageInfo.Width / (float)cutedImageInfo.Width;
                 if (roi.BBox.Quality != GTABoundingBox2.DataQuality.Low)
                 {
                     if (roi.BBox.Min.X > cutBorderWidth && roi.BBox.Min.Y > cutBorderWidth)
@@ -51,7 +54,7 @@ namespace GTAVUtils
                     }
                 }
             }
-            return new GTAVData(cutedScreenshot, filteredRoIs.ToArray(), imageInfo);
+            return new GTAVData(cutedScreenshot, filteredRoIs.ToArray(), cutedImageInfo);
         }
     }
 }

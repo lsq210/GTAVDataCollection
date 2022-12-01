@@ -165,9 +165,8 @@ namespace GTAVUtils
 
         public int Order { get; }
 
-        public ImageInfo ImageInfo { get; }
+        public ImageInfo ImageInfo { get; set; }
 
-        // FIXME:
         private int GetWidth(float w)
         {
             return (int)(w * ImageInfo.Width);
@@ -288,7 +287,7 @@ namespace GTAVUtils
         public void Save(string imageName, string labelName, bool drawBBox = true)
         {
             GTAVManager.SaveImage(imageName, Image);
-            string imageSize = $"{Image.Width},{Image.Height}";
+            string imageSize = $"{ImageInfo.Width},{ImageInfo.Height}";
             string camInfo = $"{ImageInfo.CamPos},{ImageInfo.CamRot}";
             string txt = $"{imageSize}\n{camInfo}\n";
             for (int i = 0; i < RoIs.Length; i++)
@@ -300,7 +299,7 @@ namespace GTAVUtils
             if (drawBBox)
             {
                 Draw();
-                GTAVManager.SaveImage($"bbox/{Path.GetFileNameWithoutExtension(imageName)}", Image);
+                GTAVManager.SaveBBox(imageName, Image);
             }
 
             GTAVManager.Commit();

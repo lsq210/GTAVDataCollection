@@ -20,6 +20,11 @@ namespace DataManager
             FileMamager.SaveTxt(fileName, txt);
         }
 
+        public static void SaveBBox(string fileName, Bitmap image)
+        {
+            FileMamager.SaveBBox(fileName, image);
+        }
+
         public static void Commit()
         {
             FileMamager.Commit();
