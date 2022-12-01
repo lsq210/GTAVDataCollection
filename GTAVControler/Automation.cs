@@ -9,15 +9,20 @@ namespace GTAVControler
 {
     public class Automation
     {
-        private static GTAVUtils.ROI[] GetRoIs(int width, int height)
+        private static GTAVUtils.ImageInfo GetImageInfo(Bitmap screenshot)
         {
             Vector3 camPos = World.RenderingCamera.Position;
             Vector3 camRot = World.RenderingCamera.Rotation;
+            return new GTAVUtils.ImageInfo(screenshot.Width, screenshot.Height, camPos, camRot);
+        }
+
+        private static GTAVUtils.ROI[] GetRoIs(GTAVUtils.ImageInfo imageInfo)
+        {
             Vehicle[] vehicles = World.GetAllVehicles();
             List<GTAVUtils.ROI> rois = new List<GTAVUtils.ROI>();
             foreach (Vehicle vehicle in vehicles)
             {
-                GTAVUtils.ROI roi = new GTAVUtils.ROI(vehicle, (GTAVUtils.ROI.DetectionType)vehicle.ClassType, vehicle.Model.IsBigVehicle,rois.Count, width, height, camPos, camRot);
+                GTAVUtils.ROI roi = new GTAVUtils.ROI(vehicle, (GTAVUtils.ROI.DetectionType)vehicle.ClassType, vehicle.Model.IsBigVehicle, rois.Count, imageInfo);
                 if (roi.BBox.IsValid)
                 {
                     rois.Add(roi);
@@ -38,11 +43,13 @@ namespace GTAVControler
             // screenshot
             Bitmap screenshot = GTAVUtils.Common.GetScreenshot();
 
+            GTAVUtils.ImageInfo imageInfo = GetImageInfo(screenshot);
+
             // roilabel
-            GTAVUtils.ROI[] rois = GetRoIs(screenshot.Width, screenshot.Height);
+            GTAVUtils.ROI[] rois = GetRoIs(imageInfo);
 
             // preprocess and save data
-            GTAVUtils.Common.DataPreprocess(screenshot, rois).Save(timestamp, timestamp);
+            GTAVUtils.Common.DataPreprocess(screenshot, rois, imageInfo).Save(timestamp, timestamp);
         }
 
         public static void Pause()

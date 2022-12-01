@@ -101,7 +101,7 @@ namespace GTAVUtils
 
     public class ROI
     {
-        public ROI(Entity entity, DetectionType detectionType, bool isBigVehicle, int order, int imageWidth, int imageHeight, Vector3 camPos, Vector3 camRot)
+        public ROI(Entity entity, DetectionType detectionType, bool isBigVehicle, int order, ImageInfo imageInfo)
         {
             RoIEntity = entity;
             Pos = new Vector3(entity.Position.X, entity.Position.Y, entity.Position.Z);
@@ -112,10 +112,7 @@ namespace GTAVUtils
             Type = detectionType;
             IsBigVehicle = isBigVehicle;
             Order = order;
-            ImageWidth = imageWidth;
-            ImageHeight = imageHeight;
-            CamPos = camPos;
-            CamRot = camRot;
+            ImageInfo = imageInfo;
         }
 
         public ROI(ROI preROI)
@@ -126,10 +123,7 @@ namespace GTAVUtils
             Type = preROI.Type;
             IsBigVehicle = preROI.IsBigVehicle;
             Order = preROI.Order;
-            ImageWidth = preROI.ImageWidth;
-            ImageHeight = preROI.ImageHeight;
-            CamPos = preROI.CamPos;
-            CamRot = preROI.CamRot;
+            ImageInfo = preROI.ImageInfo;
         }
 
         public enum DetectionType
@@ -169,25 +163,19 @@ namespace GTAVUtils
 
         public bool IsBigVehicle { get; }
 
-        public int ImageWidth { get; set; }
+        public int Order { get; }
 
-        public int ImageHeight { get; set; }
+        public ImageInfo ImageInfo { get; }
 
-        public Vector3 CamPos { get; }
-
-        public Vector3 CamRot { get; }
-
-        public int Order { get;  }
-
+        // FIXME:
         private int GetWidth(float w)
         {
-            return (int)(w * ImageWidth);
+            return (int)(w * ImageInfo.Width);
         }
         private int GetHeight(float h)
         {
-            return (int)(h * ImageHeight);
+            return (int)(h * ImageInfo.Height);
         }
-
         public bool CheckVisible()
         {
             Vector3 cameraPos = World.RenderingCamera.Position;
@@ -239,13 +227,41 @@ namespace GTAVUtils
         }
     }
 
+    public class ImageInfo
+    {
+        public ImageInfo(int width, int height, Vector3 camPos, Vector3 camRot)
+        {
+            Width = width;
+            Height = height;
+            CamPos = camPos;
+            CamRot = camRot;
+        }
+
+        public ImageInfo(ImageInfo preImageInfo)
+        {
+            Width = preImageInfo.Width;
+            Height = preImageInfo.Height;
+            CamPos = preImageInfo.CamPos;
+            CamRot = preImageInfo.CamRot;
+        }
+
+        public int Width { get; set; }
+
+        public int Height { get; set; }
+
+        public Vector3 CamPos { get; }
+
+        public Vector3 CamRot { get; }
+    }
+
     public class GTAVData
     {
-        public GTAVData(Bitmap image, ROI[] rois)
+        public GTAVData(Bitmap image, ROI[] rois, ImageInfo imageInfo)
         {
             Version = "v0.0.1";
             Image = image;
             RoIs = rois;
+            ImageInfo = imageInfo;
         }
 
         public string Version { get; set; }
@@ -267,12 +283,13 @@ namespace GTAVUtils
         }
 
         public ROI[] RoIs;
+        public ImageInfo ImageInfo;
 
         public void Save(string imageName, string labelName, bool drawBBox = true)
         {
             GTAVManager.SaveImage(imageName, Image);
             string imageSize = $"{Image.Width},{Image.Height}";
-            string camInfo = $"{RoIs[0].CamPos},{RoIs[0].CamRot}";
+            string camInfo = $"{ImageInfo.CamPos},{ImageInfo.CamRot}";
             string txt = $"{imageSize}\n{camInfo}\n";
             for (int i = 0; i < RoIs.Length; i++)
             {
