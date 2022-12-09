@@ -42,7 +42,9 @@ namespace GTAVUtils
                 {
                     ImageInfo = cutedImageInfo
                 };
-                float ratio = imageInfo.Width / (float)cutedImageInfo.Width;
+
+                float ratio = (float)imageInfo.Width / (float)cutedImageInfo.Width;
+
                 if (roi.BBox.Quality != GTABoundingBox2.DataQuality.Low)
                 {
                     if (roi.BBox.Min.X > cutBorderWidth && roi.BBox.Min.Y > cutBorderWidth)
@@ -56,7 +58,9 @@ namespace GTAVUtils
                     }
                 }
             }
+
             Logger.Log($"End Common.DataPreprocess, Filtered ROI Count: {filteredRoIs.Count}, imageWith: {cutedImageInfo.Width}, imageHeight: {cutedImageInfo.Height}");
+
             return new GTAVData(cutedScreenshot, filteredRoIs.ToArray(), cutedImageInfo);
         }
     }

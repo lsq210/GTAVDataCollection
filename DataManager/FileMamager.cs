@@ -8,15 +8,21 @@ namespace GTAVDataExporter
         private static readonly string DataFolder = "data";
         private static readonly string ImageSubFolder = "images";
         private static readonly string RoISubFolder = "labels";
+        private static readonly string BBoxSubFolder = "bbox";
 
         private static string GetImagePath(string fileName)
         {
-            return $"{DataFolder}/{ImageSubFolder}/{fileName}.jpg";
+            return $"{DataFolder}/{ImageSubFolder}/{fileName}.png";
         }
 
         private static string GetLabelPath(string fileName)
         {
             return $"{DataFolder}/{RoISubFolder}/{fileName}.txt";
+        }
+
+        private static string GetBBoxPath(string fileName)
+        {
+            return $"{DataFolder}/{BBoxSubFolder}/{fileName}.png";
         }
 
         private static string GetDataPath()
@@ -51,6 +57,11 @@ namespace GTAVDataExporter
             }
         }
 
+        public static void SaveBBox(string fileName, Bitmap image)
+        {
+            CreateFileDirectoryIfNotExist(GetBBoxPath(fileName));
+            image.Save(GetBBoxPath(fileName));
+        }
         public static void Commit() { }
     }
 }

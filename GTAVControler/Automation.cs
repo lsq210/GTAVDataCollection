@@ -65,9 +65,10 @@ namespace GTAVControler
             // screenshot
             Bitmap screenshot = GTAVUtils.Common.GetScreenshot();
 
+            // imageInfo
             GTAVUtils.ImageInfo imageInfo = GetImageInfo(screenshot);
 
-            // roilabel
+            // objects
             GTAVUtils.ROI[] rois = GetRoIs(imageInfo);
 
             // preprocess and save data
