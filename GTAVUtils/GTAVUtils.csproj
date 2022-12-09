@@ -87,9 +87,13 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DataManager\DataManager.csproj">
+    <ProjectReference Include="..\DataManager\GTAVDataExporter.csproj">
       <Project>{93d1cfdc-9774-4dcf-a0dd-88740e976910}</Project>
-      <Name>DataManager</Name>
+      <Name>GTAVDataExporter</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GTAVLogger\GTAVLogger.csproj">
+      <Project>{f596a410-6ee0-46e0-8b4b-2ff950d3b7b1}</Project>
+      <Name>GTAVLogger</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

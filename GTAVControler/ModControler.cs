@@ -1,37 +1,48 @@
 ﻿using System;
 using System.Windows.Forms;
 using GTA;
+using GTAVLogger;
+using GTAVDataGenerator;
+using GTAVConfigManager;
 
 namespace GTAVControler
 {
     class Cotroler: Script
     {
-        private bool enableAutoSaveScreenshot = false;
+        private readonly string MAIN_DLL_FILE_PATH = "./scripts/GTAVControler.dll";
 
         public Cotroler()
         {
             Tick += OnTick;
-            Interval = 5000;
             KeyDown += OnKeyDown;
+            ConfigManager.LoadConfig(MAIN_DLL_FILE_PATH);
             Automation.Prepare();
         }
 
         private void OnTick(object sender, EventArgs e)
         {
-            if (this.enableAutoSaveScreenshot)
-            {
-                Automation.Pause();
-                System.Threading.Thread.Sleep(3000);
-                Automation.SaveGTAVData();
-                Automation.Resume();
-            }
+            Automation.AutoSaveGTAVData();
+            Logger.Print();
         }
 
         private void OnKeyDown(object sender, KeyEventArgs e)
         {
+            // 唤起控制台开关
+            if (e.KeyCode == Keys.C)
+            {
+                Logger.Trigger();
+            }
+
+            // 添加随机载具
+            if (e.KeyCode == Keys.T)
+            {
+                DataGenerator.AddVehicle();
+            }
+
+            // 截图开关
             if (e.KeyCode == Keys.Y)
             {
-                this.enableAutoSaveScreenshot = !this.enableAutoSaveScreenshot;
+                Automation.TriggerAutoSave();
             }
 
             if (e.KeyCode == Keys.U)

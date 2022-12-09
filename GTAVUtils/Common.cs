@@ -1,8 +1,8 @@
-﻿using System;
-using System.Drawing;
+﻿using System.Drawing;
 using System.Windows.Forms;
 using System.Collections.Generic;
 using GTA.Math;
+using GTAVLogger;
 
 namespace GTAVUtils
 {
@@ -19,6 +19,8 @@ namespace GTAVUtils
 
         public static GTAVData DataPreprocess(Bitmap screenshot, ROI[] RoIs, ImageInfo imageInfo)
         {
+            Logger.Log($"Run Common.DataPreprocess, ROI Count: {RoIs.Length}, imageWith: {imageInfo.Width}, imageHeight: {imageInfo.Height}");
+
             float cutBorderWidth = .1f;
 
             // cutImage
@@ -36,7 +38,10 @@ namespace GTAVUtils
             List<ROI> filteredRoIs = new List<ROI>();
             foreach (ROI roi in RoIs)
             {
-                ROI filteredRoI = new ROI(roi);
+                ROI filteredRoI = new ROI(roi)
+                {
+                    ImageInfo = cutedImageInfo
+                };
                 float ratio = imageInfo.Width / (float)cutedImageInfo.Width;
                 if (roi.BBox.Quality != GTABoundingBox2.DataQuality.Low)
                 {
@@ -44,14 +49,15 @@ namespace GTAVUtils
                     {
                         if (roi.BBox.Max.X < (1 - cutBorderWidth) && roi.BBox.Max.Y < (1 - cutBorderWidth))
                         {
-                            filteredRoI.BBox.Min = new GTA.Math.Vector2((roi.BBox.Min.X - cutBorderWidth) * ratio, (roi.BBox.Min.Y - cutBorderWidth) * ratio);
-                            filteredRoI.BBox.Max = new GTA.Math.Vector2((roi.BBox.Max.X - cutBorderWidth) * ratio, (roi.BBox.Max.Y - cutBorderWidth) * ratio);
+                            filteredRoI.BBox.Min = new Vector2((roi.BBox.Min.X - cutBorderWidth) * ratio, (roi.BBox.Min.Y - cutBorderWidth) * ratio);
+                            filteredRoI.BBox.Max = new Vector2((roi.BBox.Max.X - cutBorderWidth) * ratio, (roi.BBox.Max.Y - cutBorderWidth) * ratio);
                             filteredRoIs.Add(filteredRoI);
                         }
                     }
                 }
             }
-            return new GTAVData(cutedScreenshot, filteredRoIs.ToArray(), imageInfo);
+            Logger.Log($"End Common.DataPreprocess, Filtered ROI Count: {filteredRoIs.Count}, imageWith: {cutedImageInfo.Width}, imageHeight: {cutedImageInfo.Height}");
+            return new GTAVData(cutedScreenshot, filteredRoIs.ToArray(), cutedImageInfo);
         }
     }
 }

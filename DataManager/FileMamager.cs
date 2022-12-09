@@ -1,7 +1,7 @@
 ﻿using System.Drawing;
 using System.IO;
 
-namespace DataManager
+namespace GTAVDataExporter
 {
     class FileMamager
     {

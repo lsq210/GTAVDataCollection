@@ -1,9 +1,9 @@
 ﻿using System.Drawing;
 using System.IO;
 
-namespace DataManager
+namespace GTAVDataExporter
 {
-    public class GTAVManager
+    public class DataExporter
     {
         public static void Prepare()
         {

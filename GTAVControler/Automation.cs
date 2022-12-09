@@ -1,7 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 using GTA;
+using GTAVLogger;
 using Vector3 = GTA.Math.Vector3;
 
 
@@ -9,6 +11,19 @@ namespace GTAVControler
 {
     public class Automation
     {
+        private static bool EnableAutoSaveScreenshot = false;
+        private static bool Paused = false;
+        private static long LastSaveTime = 0;
+        private readonly static int SLEEP_TIME_WHEN_PAUSED = 3000;
+        private readonly static long SAVE_TIME_GAP = 5000;
+
+        private static long GetTimeStamp()
+        {
+            TimeSpan ts = DateTime.Now.ToUniversalTime() - new DateTime(1970, 1, 1);
+            long time = (long)ts.TotalMilliseconds;
+            return time;
+        }
+
         private static GTAVUtils.ImageInfo GetImageInfo(Bitmap screenshot)
         {
             Vector3 camPos = World.RenderingCamera.Position;
@@ -31,13 +46,20 @@ namespace GTAVControler
             return rois.ToArray();
         }
 
-        public static void Prepare()
+        public static void TriggerAutoSave()
         {
-            DataManager.GTAVManager.Prepare();
+            EnableAutoSaveScreenshot = !EnableAutoSaveScreenshot;
         }
 
-        public static void SaveGTAVData()
+        public static void Prepare()
         {
+            GTAVDataExporter.DataExporter.Prepare();
+        }
+
+        private static void SaveGTAVData()
+        {
+            Logger.Log("Run Automation.SaveGTAVData");
+
             string timestamp = GTAVUtils.Timer.GetTimeStamp();
 
             // screenshot
@@ -50,16 +72,32 @@ namespace GTAVControler
 
             // preprocess and save data
             GTAVUtils.Common.DataPreprocess(screenshot, rois, imageInfo).Save(timestamp, timestamp);
+
+            LastSaveTime = GetTimeStamp();
         }
 
         public static void Pause()
         {
+            Logger.Log("Run Automation.Pause");
+            Paused = true;
             Game.Pause(true);
         }
 
         public static void Resume()
         {
+            Logger.Log("Run Automation.Resume");
+            Paused = false;
             Game.Pause(false);
+        }
+
+        public static void AutoSaveGTAVData()
+        {
+            if (!EnableAutoSaveScreenshot || Paused || GetTimeStamp() - LastSaveTime < SAVE_TIME_GAP) return;
+
+            Pause();
+            System.Threading.Thread.Sleep(SLEEP_TIME_WHEN_PAUSED);
+            SaveGTAVData();
+            Resume();
         }
     }
 }

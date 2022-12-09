@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using System.IO;
-using DataManager;
+using GTAVDataExporter;
 using Vector2 = GTA.Math.Vector2;
 using Vector3 = GTA.Math.Vector3;
 using Entity = GTA.Entity;
@@ -165,7 +165,7 @@ namespace GTAVUtils
 
         public int Order { get; }
 
-        public ImageInfo ImageInfo { get; }
+        public ImageInfo ImageInfo { set; get; }
 
         // FIXME:
         private int GetWidth(float w)
@@ -287,7 +287,7 @@ namespace GTAVUtils
 
         public void Save(string imageName, string labelName, bool drawBBox = true)
         {
-            GTAVManager.SaveImage(imageName, Image);
+            DataExporter.SaveImage(imageName, Image);
             string imageSize = $"{Image.Width},{Image.Height}";
             string camInfo = $"{ImageInfo.CamPos},{ImageInfo.CamRot}";
             string txt = $"{imageSize}\n{camInfo}\n";
@@ -295,15 +295,15 @@ namespace GTAVUtils
             {
                 txt += RoIs[i].Serialize(true);
             }
-            GTAVManager.SaveTxt(labelName, txt);
+            DataExporter.SaveTxt(labelName, txt);
 
             if (drawBBox)
             {
                 Draw();
-                GTAVManager.SaveImage($"bbox/{Path.GetFileNameWithoutExtension(imageName)}", Image);
+                DataExporter.SaveImage($"bbox/{Path.GetFileNameWithoutExtension(imageName)}", Image);
             }
 
-            GTAVManager.Commit();
+            DataExporter.Commit();
         }
 
         public void Draw()
