@@ -287,7 +287,6 @@ namespace GTAVUtils
         public void Save(string imageName, string labelName, bool drawBBox = true)
         {
             DataExporter.SaveImage(imageName, Image);
-            string imageSize = $"{Image.Width},{Image.Height}";
             string imageSize = $"{ImageInfo.Width},{ImageInfo.Height}";
             string camInfo = $"{ImageInfo.CamPos},{ImageInfo.CamRot}";
             string txt = $"{imageSize}\n{camInfo}\n";
