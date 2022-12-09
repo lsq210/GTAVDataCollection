@@ -101,7 +101,7 @@ namespace GTAVUtils
 
     public class ROI
     {
-        public ROI(Entity entity, DetectionType detectionType, bool isBigVehicle, int order, ImageInfo imageInfo)
+        public ROI(Entity entity, string detectionType, bool isBigVehicle, int order, ImageInfo imageInfo)
         {
             RoIEntity = entity;
             Pos = new Vector3(entity.Position.X, entity.Position.Y, entity.Position.Z);
@@ -109,7 +109,7 @@ namespace GTAVUtils
             if (!CheckVisible()) {
                 BBox.Quality = GTABoundingBox2.DataQuality.Middle;
             }
-            Type = detectionType;
+            DetectionType = detectionType;
             IsBigVehicle = isBigVehicle;
             Order = order;
             ImageInfo = imageInfo;
@@ -120,13 +120,13 @@ namespace GTAVUtils
             RoIEntity = preROI.RoIEntity;
             Pos = preROI.Pos;
             BBox = preROI.BBox;
-            Type = preROI.Type;
+            DetectionType = preROI.DetectionType;
             IsBigVehicle = preROI.IsBigVehicle;
             Order = preROI.Order;
             ImageInfo = preROI.ImageInfo;
         }
 
-        public enum DetectionType
+/*        public enum DetectionType
         {
             Compacts = 0,
             Sedans = 1,
@@ -151,7 +151,9 @@ namespace GTAVUtils
             Commercial = 20,
             Trains = 21,
             OpenWheel = 22
-        }
+        }*/
+
+        public string DetectionType { get; }
 
         public Entity RoIEntity { get; }
 
@@ -159,7 +161,7 @@ namespace GTAVUtils
 
         public GTABoundingBox2 BBox { get; }
 
-        public DetectionType Type { get; }
+/*        public DetectionType Type { get; }*/
 
         public bool IsBigVehicle { get; }
 
@@ -187,7 +189,7 @@ namespace GTAVUtils
         public string Serialize(bool autoCrlf = false)
         {
             string vehicleSize = IsBigVehicle ? "large-vehicle" : "small-vehicle";
-            string data = $"{Order},{GetWidth(BBox.Min.X)},{GetHeight(BBox.Min.Y)},{GetWidth(BBox.Max.X)},{GetHeight(BBox.Max.Y)},{Type},{vehicleSize},{BBox.Quality}";
+            string data = $"{Order},{GetWidth(BBox.Min.X)},{GetHeight(BBox.Min.Y)},{GetWidth(BBox.Max.X)},{GetHeight(BBox.Max.Y)},{DetectionType},{vehicleSize},{BBox.Quality}";
             if (!autoCrlf)
             {
                 return data;
@@ -222,7 +224,7 @@ namespace GTAVUtils
             Pen pen = new Pen(color);
             Graphics g = Graphics.FromImage(image);
             g.DrawRectangle(pen, GetWidth(BBox.Min.X), GetHeight(BBox.Min.Y), GetWidth(BBox.Width), GetHeight(BBox.Height));
-            g.DrawString($"{Order}:{Type}", SystemFonts.DefaultFont, new SolidBrush(color), GetWidth(BBox.Min.X), GetHeight(BBox.Max.Y));
+            g.DrawString($"{Order}:{DetectionType}", SystemFonts.DefaultFont, new SolidBrush(color), GetWidth(BBox.Min.X), GetHeight(BBox.Max.Y));
         }
     }
 

@@ -16,21 +16,18 @@ namespace GTAVControler
             return new GTAVUtils.ImageInfo(screenshot.Width, screenshot.Height, camPos, camRot);
         }
 
+
         private static GTAVUtils.ROI[] GetRoIs(GTAVUtils.ImageInfo imageInfo)
         {
             Vehicle[] vehicles = World.GetAllVehicles();
             List<GTAVUtils.ROI> rois = new List<GTAVUtils.ROI>();
             foreach (Vehicle vehicle in vehicles)
             {
-                GTAVUtils.ROI roi = new GTAVUtils.ROI(vehicle, (GTAVUtils.ROI.DetectionType)vehicle.ClassType, vehicle.Model.IsBigVehicle, rois.Count, imageInfo);
-                if (roi.BBox.IsValid)
-                {
-                    rois.Add(roi);
-                }
+                GTAVUtils.ROI roi = new GTAVUtils.ROI(vehicle, vehicle.ClassType.ToString(), vehicle.Model.IsBigVehicle, rois.Count, imageInfo);
+                rois.Add(roi);
             }
             return rois.ToArray();
         }
-
         public static void Prepare()
         {
             DataManager.GTAVManager.Prepare();
