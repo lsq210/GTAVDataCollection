@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using System.IO;
-using DataManager;
+using GTAVDataExporter;
 using Vector2 = GTA.Math.Vector2;
 using Vector3 = GTA.Math.Vector3;
 using Entity = GTA.Entity;
@@ -288,7 +288,7 @@ namespace GTAVUtils
 
         public void Save(string imageName, string labelName, bool drawBBox = true)
         {
-            GTAVManager.SaveImage(imageName, Image);
+            DataExporter.SaveImage(imageName, Image);
             string imageSize = $"{ImageInfo.Width},{ImageInfo.Height}";
             string camInfo = $"{ImageInfo.CamPos},{ImageInfo.CamRot}";
             string txt = $"{imageSize}\n{camInfo}\n";
@@ -296,15 +296,15 @@ namespace GTAVUtils
             {
                 txt += RoIs[i].Serialize(true);
             }
-            GTAVManager.SaveTxt(labelName, txt);
+            DataExporter.SaveTxt(labelName, txt);
 
             if (drawBBox)
             {
                 Draw();
-                GTAVManager.SaveBBox(imageName, Image);
+                DataExporter.SaveBBox(imageName, Image);
             }
 
-            GTAVManager.Commit();
+            DataExporter.Commit();
         }
 
         public void Draw()

@@ -56,12 +56,6 @@
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="log4net, Version=1.2.13.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
-      <HintPath>..\packages\log4net.2.0.3\lib\net40-full\log4net.dll</HintPath>
-    </Reference>
-    <Reference Include="Log4Net.Async, Version=2.0.4.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Log4Net.Async.2.0.4\lib\net40\Log4Net.Async.dll</HintPath>
-    </Reference>
     <Reference Include="ScriptHookVDotNet3, Version=3.1.0.0, Culture=neutral, processorArchitecture=AMD64">
       <HintPath>..\packages\ScriptHookVDotNet3.3.1.0\lib\net48\ScriptHookVDotNet3.dll</HintPath>
     </Reference>
@@ -72,6 +66,7 @@
       <HintPath>..\packages\SharpDX.Mathematics.4.2.0\lib\net45\SharpDX.Mathematics.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
@@ -92,9 +87,21 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DataManager\DataManager.csproj">
+    <ProjectReference Include="..\DataManager\GTAVDataExporter.csproj">
       <Project>{93d1cfdc-9774-4dcf-a0dd-88740e976910}</Project>
-      <Name>DataManager</Name>
+      <Name>GTAVDataExporter</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GTAVConfigManager\GTAVConfigManager.csproj">
+      <Project>{ddfe3eac-7bb6-4a79-85ce-c417da68df17}</Project>
+      <Name>GTAVConfigManager</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GTAVDataGenerator\GTAVDataGenerator.csproj">
+      <Project>{e09044c6-27a3-4090-8990-975165a19df9}</Project>
+      <Name>GTAVDataGenerator</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GTAVLogger\GTAVLogger.csproj">
+      <Project>{f596a410-6ee0-46e0-8b4b-2ff950d3b7b1}</Project>
+      <Name>GTAVLogger</Name>
     </ProjectReference>
     <ProjectReference Include="..\GTAVUtils\GTAVUtils.csproj">
       <Project>{0289a5a7-78a5-4e51-925a-05e015f2ce98}</Project>

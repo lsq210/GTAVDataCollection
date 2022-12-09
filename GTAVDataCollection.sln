@@ -5,9 +5,15 @@ VisualStudioVersion = 16.0.30621.155
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GTAVControler", "GTAVControler\GTAVControler.csproj", "{1A9A7DA7-F948-4EAA-8C28-C31ED98B4B57}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataManager", "DataManager\DataManager.csproj", "{93D1CFDC-9774-4DCF-A0DD-88740E976910}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GTAVDataExporter", "DataManager\GTAVDataExporter.csproj", "{93D1CFDC-9774-4DCF-A0DD-88740E976910}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GTAVUtils", "GTAVUtils\GTAVUtils.csproj", "{0289A5A7-78A5-4E51-925A-05E015F2CE98}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GTAVDataGenerator", "GTAVDataGenerator\GTAVDataGenerator.csproj", "{E09044C6-27A3-4090-8990-975165A19DF9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GTAVLogger", "GTAVLogger\GTAVLogger.csproj", "{F596A410-6EE0-46E0-8B4B-2FF950D3B7B1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GTAVConfigManager", "GTAVConfigManager\GTAVConfigManager.csproj", "{DDFE3EAC-7BB6-4A79-85CE-C417DA68DF17}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,6 +47,30 @@ Global
 		{0289A5A7-78A5-4E51-925A-05E015F2CE98}.Release|Any CPU.Build.0 = Release|Any CPU
 		{0289A5A7-78A5-4E51-925A-05E015F2CE98}.Release|x64.ActiveCfg = Release|x64
 		{0289A5A7-78A5-4E51-925A-05E015F2CE98}.Release|x64.Build.0 = Release|x64
+		{E09044C6-27A3-4090-8990-975165A19DF9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E09044C6-27A3-4090-8990-975165A19DF9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E09044C6-27A3-4090-8990-975165A19DF9}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{E09044C6-27A3-4090-8990-975165A19DF9}.Debug|x64.Build.0 = Debug|Any CPU
+		{E09044C6-27A3-4090-8990-975165A19DF9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E09044C6-27A3-4090-8990-975165A19DF9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E09044C6-27A3-4090-8990-975165A19DF9}.Release|x64.ActiveCfg = Release|Any CPU
+		{E09044C6-27A3-4090-8990-975165A19DF9}.Release|x64.Build.0 = Release|Any CPU
+		{F596A410-6EE0-46E0-8B4B-2FF950D3B7B1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F596A410-6EE0-46E0-8B4B-2FF950D3B7B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F596A410-6EE0-46E0-8B4B-2FF950D3B7B1}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{F596A410-6EE0-46E0-8B4B-2FF950D3B7B1}.Debug|x64.Build.0 = Debug|Any CPU
+		{F596A410-6EE0-46E0-8B4B-2FF950D3B7B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F596A410-6EE0-46E0-8B4B-2FF950D3B7B1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F596A410-6EE0-46E0-8B4B-2FF950D3B7B1}.Release|x64.ActiveCfg = Release|Any CPU
+		{F596A410-6EE0-46E0-8B4B-2FF950D3B7B1}.Release|x64.Build.0 = Release|Any CPU
+		{DDFE3EAC-7BB6-4A79-85CE-C417DA68DF17}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DDFE3EAC-7BB6-4A79-85CE-C417DA68DF17}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DDFE3EAC-7BB6-4A79-85CE-C417DA68DF17}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{DDFE3EAC-7BB6-4A79-85CE-C417DA68DF17}.Debug|x64.Build.0 = Debug|Any CPU
+		{DDFE3EAC-7BB6-4A79-85CE-C417DA68DF17}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DDFE3EAC-7BB6-4A79-85CE-C417DA68DF17}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DDFE3EAC-7BB6-4A79-85CE-C417DA68DF17}.Release|x64.ActiveCfg = Release|Any CPU
+		{DDFE3EAC-7BB6-4A79-85CE-C417DA68DF17}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
