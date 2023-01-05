@@ -34,7 +34,7 @@ namespace GTAVControler
             }
 
             // 添加随机载具
-            if (e.KeyCode == Keys.T)
+            if (e.KeyCode == Keys.N)
             {
                 DataGenerator.AddVehicle();
             }

@@ -10,7 +10,7 @@ namespace GTAVUtils
         {
             OutputArgument resX = new OutputArgument();
             OutputArgument resY = new OutputArgument();
-            Function.Call<bool>(Hash._GET_SCREEN_COORD_FROM_WORLD_COORD, pos.X, pos.Y, pos.Z, resX, resY);
+            Function.Call<bool>(Hash.GET_SCREEN_COORD_FROM_WORLD_COORD, pos.X, pos.Y, pos.Z, resX, resY);
             return new Vector2(resX.GetResult<float>(), resY.GetResult<float>());
         }
     }

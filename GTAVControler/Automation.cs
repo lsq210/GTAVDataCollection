@@ -38,6 +38,8 @@ namespace GTAVControler
             List<GTAVUtils.ROI> rois = new List<GTAVUtils.ROI>();
             foreach (Vehicle vehicle in vehicles)
             {
+                /*Logger.Log($"DisplayName - {vehicle.DisplayName}");
+                Logger.Log($"HashCode - {vehicle.Model.GetHashCode()}");*/
                 GTAVUtils.ROI roi = new GTAVUtils.ROI(vehicle, vehicle.ClassType.ToString(), vehicle.Model.IsBigVehicle, rois.Count, imageInfo);
                 rois.Add(roi);
             }

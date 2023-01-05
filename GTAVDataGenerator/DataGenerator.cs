@@ -1,6 +1,9 @@
 ﻿using GTA;
 using GTA.Math;
 using GTAVLogger;
+using System;
+using System.IO;
+using System.Text;
 using System.Collections.Generic;
 
 namespace GTAVDataGenerator
@@ -22,14 +25,21 @@ namespace GTAVDataGenerator
 
         private static Vector3 GetNextPlacePosition()
         {
-            var playerPosition = Game.Player.Character.Position;
-            var position = new Vector3(playerPosition.X + 2f, playerPosition.Y + 2f, playerPosition.Z);
+            Vector3 cameraPoistion = World.RenderingCamera.Position;
+            Random rand = new Random();
+            var num = rand.Next(0, 100) - 50;
+            var position = new Vector3(cameraPoistion.X + num, cameraPoistion.Y + num, 0);
             return position;
         }
 
         private static Model GetNextModel()
         {
-            return new Model(VehicleHash.Vacca);
+            string vehicleHashPath = "vehiclehash.txt";
+            string[] vehicleHashes = File.ReadAllLines(vehicleHashPath, Encoding.UTF8);
+            Random rand = new Random();
+            int tempIndex = rand.Next(0, vehicleHashes.Length - 1);
+            string selectedVehicleHash = vehicleHashes[tempIndex].Split('\t')[1];
+            return new Model(int.Parse(selectedVehicleHash));
         }
 
         public static void AddVehicle()
@@ -39,7 +49,7 @@ namespace GTAVDataGenerator
 
             model.Request();
             Vehicle vehicle = World.CreateVehicle(model, position);
-
+            
             if (vehicle == null)
             {
                 Logger.Warning("vehicle is null");
@@ -50,7 +60,7 @@ namespace GTAVDataGenerator
                 vehicle.PlaceOnGround();
                 //mod.MarkAsNoLongerNeeded();
                 Items.Add(new DataGeneratorItem(vehicle, position));
-                Logger.Log($"vehicle - {vehicle.ClassType} added");
+                Logger.Log($"vehicle - {vehicle.ClassType}is added on {position}");
             }
         }
     }
