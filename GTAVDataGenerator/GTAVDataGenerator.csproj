@@ -6,6 +6,8 @@
 
   <ItemGroup>
     <PackageReference Include="ScriptHookVDotNet3" Version="3.5.1" />
+    <PackageReference Include="SharpDX" Version="4.2.0" />
+    <PackageReference Include="SharpDX.Mathematics" Version="4.2.0" />
   </ItemGroup>
 
   <ItemGroup>

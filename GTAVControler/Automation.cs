@@ -40,8 +40,11 @@ namespace GTAVControler
             {
                 /*Logger.Log($"DisplayName - {vehicle.DisplayName}");
                 Logger.Log($"HashCode - {vehicle.Model.GetHashCode()}");*/
-                GTAVUtils.ROI roi = new GTAVUtils.ROI(vehicle, vehicle.ClassType.ToString(), vehicle.Model.IsBigVehicle, rois.Count, imageInfo);
-                rois.Add(roi);
+                if (vehicle.IsOnScreen)
+                {
+                    GTAVUtils.ROI roi = new GTAVUtils.ROI(vehicle, vehicle.ClassType.ToString(), vehicle.Model.IsBigVehicle, rois.Count, imageInfo);
+                    rois.Add(roi);
+                }
             }
             return rois.ToArray();
         }

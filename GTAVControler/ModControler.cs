@@ -17,6 +17,7 @@ namespace GTAVControler
             KeyDown += OnKeyDown;
             ConfigManager.LoadConfig(MAIN_DLL_FILE_PATH);
             Automation.Prepare();
+            DataGenerator.InitModel();
         }
 
         private void OnTick(object sender, EventArgs e)
