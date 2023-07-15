@@ -23,9 +23,8 @@ English | [简体中文](./README-zh_CN.md)
 
 ## 💿 DataSets
 
-|[Baidu Netdisk](https://foo.bar/baidu)|[ALi Netdisk](https://foo.bar/ali)|
-|:-:|:-:|
+[Baidu Netdisk](https://foo.bar/baidu) | [ALi Netdisk](https://foo.bar/ali)
 
 ---
 
-<p align="center">💻 <a href="https://github.com/lsq210/GTAVDataCollection">Project repo</a> | 📬 <a href="mailto:1135595767@qq.com">Contact me</a></center>
+<p align="center">💻 <a href="https://github.com/lsq210/GTAVDataCollection">Project repo</a> | 📬 <a href="mailto:1135595767@qq.com">Contact me</a></p>

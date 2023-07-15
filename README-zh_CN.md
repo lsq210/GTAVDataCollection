@@ -23,9 +23,8 @@ GTAVDataCollection 是一个 Grand Theft Auto V 的三方模组，用于从 GTAV
 
 ## 💿 数据下载
 
-|[百度网盘](https://foo.bar/baidu)|[阿里网盘](https://foo.bar/ali)|
-|:-:|:-:|
+[百度网盘](https://foo.bar/baidu) | [阿里网盘](https://foo.bar/ali)
 
 ---
 
-<p align="center">💻 <a href="https://github.com/lsq210/GTAVDataCollection">项目地址</a> | 📬 <a href="mailto:1135595767@qq.com">联系我</a></center>
+<p align="center">💻 <a href="https://github.com/lsq210/GTAVDataCollection">项目地址</a> | 📬 <a href="mailto:1135595767@qq.com">联系我</a></p>
