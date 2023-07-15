@@ -1,8 +1,10 @@
-# GTAVDataCollection
+<h1 align="center">GTAVDataCollection</h1>
 
 GTAVDataCollection is a mod to extract synthetic data from Grand Theft Auto V.  The data includes  photo-realistic computer images and annotations that can be used for the training of machine learning algorithms.
 
 ![demo image](resources/bbox.jpg)
+
+English | [简体中文](./README-zh_CN.md)
 
 ## Requirements
 - [ScriptHookV](http://www.dev-c.com/gtav/scripthookv/)
