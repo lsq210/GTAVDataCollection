@@ -27,4 +27,4 @@ English | [简体中文](./README-zh_CN.md)
 
 ---
 
-<p align="center">💻 <a href="https://github.com/lsq210/GTAVDataCollection" target="_blank>Project repo</a> | 📬 <a href="mailto:1135595767@qq.com">Contact me</a></p>
+<p align="center">💻 <a href="https://github.com/lsq210/GTAVDataCollection" target="_blank">Project repo</a> | 📬 <a href="mailto:1135595767@qq.com">Contact me</a></p>
