@@ -1,23 +1,23 @@
 # GTAVDataCollection
 
-GTAVDataCollection is a mod to extract synthetic data from Grand Theft Auto V.  The data includes  photo-realistic computer images and annotations that can be used for the training of machine learning algorithms.
+GTAVDataCollection 是一个 Grand Theft Auto V 的三方模组，用于从 GTAV 中提取数据，其中包含用于机器学习训练的仿现实图片和标签
 
 ![demo image](resources/bbox.jpg)
 
 [English](./README.md) | 简体中文
 
-## Requirements
+## 环境要求
 - [ScriptHookV](http://www.dev-c.com/gtav/scripthookv/)
 - [ScriptHookVDotNet](https://github.com/crosire/scripthookvdotnet/releases)
 - [Scripted Camera Tool](https://www.gta5-mods.com/scripts/scripted-camera-tool-1-0)
 - [Visual Studio 2019](https://visualstudio.microsoft.com/vs)
 - [.NET Framework ≥ 4.8](https://www.visualstudio.com/cs/downloads/)
-- Others managed by Nuget
+- 其它通过 Nuget 包管理器管理的模块
 
-## Quick Start
-1. Download and install ScriptHookV、ScriptHookVDotNet and Scripted Camera Tool.
-2. Download [pre-built binaries](https://github.com/lsq210/GTAVDataCollection/releases/) and copy them to `Grand Theft Auto V/scripts/`.
-3. Start the game.
-4. Press T to set the camera.
-5. Press Y to start or stop extracting data. The data should be created in `Grand Theft Auto V/data/`.
+## 快速开始
+2. 下载并安装 ScriptHookV、ScriptHookVDotNet 和 Scripted Camera Tool
+3. 下载[二进制文件](https://github.com/lsq210/GTAVDataCollection/releases/)并拷贝到 `Grand Theft Auto V/scripts/` 目录
+4. 启动游戏
+5. 按 T 对相机进行设置
+6. 按 Y 开始或结束数据提取工作。数据将被保存到 `Grand Theft Auto V/data/` 目录
 
