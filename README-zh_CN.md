@@ -21,10 +21,12 @@ GTAVDataCollection 是一个 Grand Theft Auto V 的三方模组，用于从 GTAV
 5. 按 T 对相机进行设置
 6. 按 Y 开始或结束数据提取工作。数据将被保存到 `Grand Theft Auto V/data/` 目录
 
-## 💿 数据下载
+## 💿 数据集
 
 [百度网盘](https://foo.bar/baidu) | [阿里网盘](https://foo.bar/ali)
 
+TODO: 数据介绍
+
 ---
 
-<p align="center">💻 <a href="https://github.com/lsq210/GTAVDataCollection" target="_blank">项目地址</a> | 📬 <a href="mailto:1135595767@qq.com">联系我</a></p>
+<p align="center">💻 <a href="https://github.com/lsq210/GTAVDataCollection" target="_blank">项目地址</a> | 📬 <a href="mailto:luoshiqi@whu.edu.cn">联系我</a></p>

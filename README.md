@@ -25,6 +25,8 @@ English | [简体中文](./README-zh_CN.md)
 
 [Baidu Netdisk](https://foo.bar/baidu) | [ALi Netdisk](https://foo.bar/ali)
 
+TODO: Introduce for DataSet
+
 ---
 
-<p align="center">💻 <a href="https://github.com/lsq210/GTAVDataCollection" target="_blank">Project repo</a> | 📬 <a href="mailto:1135595767@qq.com">Contact me</a></p>
+<p align="center">💻 <a href="https://github.com/lsq210/GTAVDataCollection" target="_blank">Project repo</a> | 📬 <a href="mailto:luoshiqi@whu.edu.cn">Contact me</a></p>
