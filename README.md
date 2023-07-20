@@ -23,7 +23,7 @@ English | [简体中文](./README-zh_CN.md)
 
 ## 💿 DataSets
 
-[Baidu Netdisk](https://foo.bar/baidu) | [ALi Netdisk](https://foo.bar/ali)
+[Baidu Netdisk](https://pan.baidu.com/s/1ad8-_92C9RGL2wQpRCAjGA?pwd=8ply)
 
 TODO: Introduce for DataSet
 
