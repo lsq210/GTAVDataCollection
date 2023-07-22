@@ -34,23 +34,130 @@ GTAVDataCollection 是一个 Grand Theft Auto V 的三方模组，用于从 GTAV
 ### 目标类别
 
 数据集中包含15类车辆目标，分别是Compacts，Sedans，SUVs，Coupes，Muscle，SportsClassics，Sports，Super，OffRoad，Industrial，Utility，Vans，Service，Emergency，Commercial。以下是这些目标的示例图：
-| **Compacts**| ![Compacts_1](resources/sub_class/Compacts/1.png)  | ![Compacts_2](resources/sub_class/Compacts/2.png) | ![Compacts_3](resources/sub_class/Compacts/3.png)  | ![Compacts_4](resources/sub_class/Compacts/4.png) | ![Compacts_5](resources/sub_class/Compacts/5.png)  |
-|  ----  | ----  | ---- | ----  | ---- | ---- |
-| **Sedans** | ![Sedans_1](resources/sub_class/Sedans/1.png)  | ![Sedans_2](resources/sub_class/Sedans/2.png) | ![Sedans_3](resources/sub_class/Sedans/3.png)  | ![Sedans_4](resources/sub_class/Sedans/4.png) |![Sedans_5](resources/sub_class/Sedans/5.png)  |
-| **SUVs** | ![SUVs_1](resources/sub_class/SUVs/1.png)  | ![SUVs_2](resources/sub_class/SUVs/2.png) | ![SUVs_3](resources/sub_class/SUVs/3.png)  | ![SUVs_4](resources/sub_class/SUVs/4.png) |![SUVs_5](resources/sub_class/SUVs/5.png)  |
-| **Coupes** | ![Coupes_1](resources/sub_class/Coupes/1.png)  | ![Coupes_2](resources/sub_class/Coupes/2.png) | ![Coupes_3](resources/sub_class/Coupes/3.png)  | ![Coupes_4](resources/sub_class/Coupes/4.png) |![Coupes_5](resources/sub_class/Coupes/5.png)  |
-| **Muscle** | ![Muscle_1](resources/sub_class/Muscle/1.png)  | ![Muscle_2](resources/sub_class/Muscle/2.png) | ![Muscle_3](resources/sub_class/Muscle/3.png)  | ![Muscle_4](resources/sub_class/Muscle/4.png) |![Muscle_5](resources/sub_class/Muscle/5.png)  |
-| **SportsClassics** | ![SportsClassics_1](resources/sub_class/SportsClassics/1.png)  | ![SportsClassics_2](resources/sub_class/SportsClassics/2.png) | ![SportsClassics_3](resources/sub_class/SportsClassics/3.png)  | ![SportsClassics_4](resources/sub_class/SportsClassics/4.png) |![SportsClassics_5](resources/sub_class/SportsClassics/5.png)  |
-| **Sports** | ![Sports_1](resources/sub_class/Sports/1.png)  | ![Sports_2](resources/sub_class/Sports/2.png) | ![Sports_3](resources/sub_class/Sports/3.png)  | ![Sports_4](resources/sub_class/Sports/4.png) |![Sports_5](resources/sub_class/Sports/5.png)  |
-| **Super** | ![Super_1](resources/sub_class/Super/1.png)  | ![Super_2](resources/sub_class/Super/2.png) | ![Super_3](resources/sub_class/Super/3.png)  | ![Super_4](resources/sub_class/Super/4.png) |![Super_5](resources/sub_class/Super/5.png)  |
-| **OffRoad** | ![OffRoad_1](resources/sub_class/OffRoad/1.png)  | ![OffRoad_2](resources/sub_class/OffRoad/2.png) | ![OffRoad_3](resources/sub_class/OffRoad/3.png)  | ![OffRoad_4](resources/sub_class/OffRoad/4.png) |![OffRoad_5](resources/sub_class/OffRoad/5.png)  |
-| **Industrial** | ![Industrial_1](resources/sub_class/Industrial/1.png)  | ![Industrial_2](resources/sub_class/Industrial/2.png) | ![Industrial_3](resources/sub_class/Industrial/3.png)  | ![Industrial_4](resources/sub_class/Industrial/4.png) |![Industrial_5](resources/sub_class/Industrial/5.png)  |
-| **Utility** | ![Utility_1](resources/sub_class/Utility/1.png)  | ![Utility_2](resources/sub_class/Utility/2.png) | ![Utility_3](resources/sub_class/Utility/3.png)  | ![Utility_4](resources/sub_class/Utility/4.png) |![Utility_5](resources/sub_class/Utility/5.png)  |
-| **Vans** | ![Vans_1](resources/sub_class/Vans/1.png)  | ![Vans_2](resources/sub_class/Vans/2.png) | ![Vans_3](resources/sub_class/Vans/3.png)  | ![Vans_4](resources/sub_class/Vans/4.png) |![Vans_5](resources/sub_class/Vans/5.png)  |
-| **Service** | ![Service_1](resources/sub_class/Service/1.png)  | ![Service_2](resources/sub_class/Service/2.png) | ![Service_3](resources/sub_class/Service/3.png)  | ![Service_4](resources/sub_class/Service/4.png) |![Service_5](resources/sub_class/Service/5.png)  |
-| **Emergency** | ![Emergency_1](resources/sub_class/Emergency/1.png)  | ![Emergency_2](resources/sub_class/Emergency/2.png) | ![Emergency_3](resources/sub_class/Emergency/3.png)  | ![Emergency_4](resources/sub_class/Emergency/4.png) |![Emergency_5](resources/sub_class/Emergency/5.png)  |
-| **Commercial** | ![Commercial_1](resources/sub_class/Commercial/1.png)  | ![Commercial_2](resources/sub_class/Commercial/2.png) | ![Commercial_3](resources/sub_class/Commercial/3.png)  | ![Commercial_4](resources/sub_class/Commercial/4.png) |![Commercial_5](resources/sub_class/Commercial/5.png)  |
----
+
+<table>
+  <tr>
+    <td><b>Compacts</b></td>
+    <td><img alt="Compacts_1" src="./resources/sub_class/Compacts/1.png"></td>
+    <td><img alt="Compacts_1" src="./resources/sub_class/Compacts/2.png"></td>
+    <td><img alt="Compacts_1" src="./resources/sub_class/Compacts/3.png"></td>
+    <td><img alt="Compacts_1" src="./resources/sub_class/Compacts/4.png"></td>
+    <td><img alt="Compacts_1" src="./resources/sub_class/Compacts/5.png"></td>
+  </tr>
+  <tr>
+    <td><b>Sedans</b></td>
+    <td><img alt="Sedans_1" src="./resources/sub_class/Sedans/1.png"></td>
+    <td><img alt="Sedans_1" src="./resources/sub_class/Sedans/2.png"></td>
+    <td><img alt="Sedans_1" src="./resources/sub_class/Sedans/3.png"></td>
+    <td><img alt="Sedans_1" src="./resources/sub_class/Sedans/4.png"></td>
+    <td><img alt="Sedans_1" src="./resources/sub_class/Sedans/5.png"></td>
+  </tr>
+  <tr>
+    <td><b>SUVs</b></td>
+    <td><img alt="SUVs_1" src="./resources/sub_class/SUVs/1.png"></td>
+    <td><img alt="SUVs_1" src="./resources/sub_class/SUVs/2.png"></td>
+    <td><img alt="SUVs_1" src="./resources/sub_class/SUVs/3.png"></td>
+    <td><img alt="SUVs_1" src="./resources/sub_class/SUVs/4.png"></td>
+    <td><img alt="SUVs_1" src="./resources/sub_class/SUVs/5.png"></td>
+  </tr>
+  <tr>
+    <td><b>Coupes</b></td>
+    <td><img alt="Coupes_1" src="./resources/sub_class/Coupes/1.png"></td>
+    <td><img alt="Coupes_1" src="./resources/sub_class/Coupes/2.png"></td>
+    <td><img alt="Coupes_1" src="./resources/sub_class/Coupes/3.png"></td>
+    <td><img alt="Coupes_1" src="./resources/sub_class/Coupes/4.png"></td>
+    <td><img alt="Coupes_1" src="./resources/sub_class/Coupes/5.png"></td>
+  </tr>
+  <tr>
+    <td><b>Muscle</b></td>
+    <td><img alt="Muscle_1" src="./resources/sub_class/Muscle/1.png"></td>
+    <td><img alt="Muscle_1" src="./resources/sub_class/Muscle/2.png"></td>
+    <td><img alt="Muscle_1" src="./resources/sub_class/Muscle/3.png"></td>
+    <td><img alt="Muscle_1" src="./resources/sub_class/Muscle/4.png"></td>
+    <td><img alt="Muscle_1" src="./resources/sub_class/Muscle/5.png"></td>
+  </tr>
+  <tr>
+    <td><b>SportsClassics</b></td>
+    <td><img alt="SportsClassics_1" src="./resources/sub_class/SportsClassics/1.png"></td>
+    <td><img alt="SportsClassics_1" src="./resources/sub_class/SportsClassics/2.png"></td>
+    <td><img alt="SportsClassics_1" src="./resources/sub_class/SportsClassics/3.png"></td>
+    <td><img alt="SportsClassics_1" src="./resources/sub_class/SportsClassics/4.png"></td>
+    <td><img alt="SportsClassics_1" src="./resources/sub_class/SportsClassics/5.png"></td>
+  </tr>
+  <tr>
+    <td><b>Sports</b></td>
+    <td><img alt="Sports_1" src="./resources/sub_class/Sports/1.png"></td>
+    <td><img alt="Sports_1" src="./resources/sub_class/Sports/2.png"></td>
+    <td><img alt="Sports_1" src="./resources/sub_class/Sports/3.png"></td>
+    <td><img alt="Sports_1" src="./resources/sub_class/Sports/4.png"></td>
+    <td><img alt="Sports_1" src="./resources/sub_class/Sports/5.png"></td>
+  </tr>
+  <tr>
+    <td><b>Super</b></td>
+    <td><img alt="Super_1" src="./resources/sub_class/Super/1.png"></td>
+    <td><img alt="Super_1" src="./resources/sub_class/Super/2.png"></td>
+    <td><img alt="Super_1" src="./resources/sub_class/Super/3.png"></td>
+    <td><img alt="Super_1" src="./resources/sub_class/Super/4.png"></td>
+    <td><img alt="Super_1" src="./resources/sub_class/Super/5.png"></td>
+  </tr>
+  <tr>
+    <td><b>OffRoad</b></td>
+    <td><img alt="OffRoad_1" src="./resources/sub_class/OffRoad/1.png"></td>
+    <td><img alt="OffRoad_1" src="./resources/sub_class/OffRoad/2.png"></td>
+    <td><img alt="OffRoad_1" src="./resources/sub_class/OffRoad/3.png"></td>
+    <td><img alt="OffRoad_1" src="./resources/sub_class/OffRoad/4.png"></td>
+    <td><img alt="OffRoad_1" src="./resources/sub_class/OffRoad/5.png"></td>
+  </tr>
+  <tr>
+    <td><b>Industrial</b></td>
+    <td><img alt="Industrial_1" src="./resources/sub_class/Industrial/1.png"></td>
+    <td><img alt="Industrial_1" src="./resources/sub_class/Industrial/2.png"></td>
+    <td><img alt="Industrial_1" src="./resources/sub_class/Industrial/3.png"></td>
+    <td><img alt="Industrial_1" src="./resources/sub_class/Industrial/4.png"></td>
+    <td><img alt="Industrial_1" src="./resources/sub_class/Industrial/5.png"></td>
+  </tr>
+  <tr>
+    <td><b>Utility</b></td>
+    <td><img alt="Utility_1" src="./resources/sub_class/Utility/1.png"></td>
+    <td><img alt="Utility_1" src="./resources/sub_class/Utility/2.png"></td>
+    <td><img alt="Utility_1" src="./resources/sub_class/Utility/3.png"></td>
+    <td><img alt="Utility_1" src="./resources/sub_class/Utility/4.png"></td>
+    <td><img alt="Utility_1" src="./resources/sub_class/Utility/5.png"></td>
+  </tr>
+  <tr>
+    <td><b>Vans</b></td>
+    <td><img alt="Vans_1" src="./resources/sub_class/Vans/1.png"></td>
+    <td><img alt="Vans_1" src="./resources/sub_class/Vans/2.png"></td>
+    <td><img alt="Vans_1" src="./resources/sub_class/Vans/3.png"></td>
+    <td><img alt="Vans_1" src="./resources/sub_class/Vans/4.png"></td>
+    <td><img alt="Vans_1" src="./resources/sub_class/Vans/5.png"></td>
+  </tr>
+  <tr>
+    <td><b>Service</b></td>
+    <td><img alt="Service_1" src="./resources/sub_class/Service/1.png"></td>
+    <td><img alt="Service_1" src="./resources/sub_class/Service/2.png"></td>
+    <td><img alt="Service_1" src="./resources/sub_class/Service/3.png"></td>
+    <td><img alt="Service_1" src="./resources/sub_class/Service/4.png"></td>
+    <td><img alt="Service_1" src="./resources/sub_class/Service/5.png"></td>
+  </tr>
+  <tr>
+    <td><b>Emergency</b></td>
+    <td><img alt="Emergency_1" src="./resources/sub_class/Emergency/1.png"></td>
+    <td><img alt="Emergency_1" src="./resources/sub_class/Emergency/2.png"></td>
+    <td><img alt="Emergency_1" src="./resources/sub_class/Emergency/3.png"></td>
+    <td><img alt="Emergency_1" src="./resources/sub_class/Emergency/4.png"></td>
+    <td><img alt="Emergency_1" src="./resources/sub_class/Emergency/5.png"></td>
+  </tr>
+  <tr>
+    <td><b>Commercial</b></td>
+    <td><img alt="Commercial_1" src="./resources/sub_class/Commercial/1.png"></td>
+    <td><img alt="Commercial_1" src="./resources/sub_class/Commercial/2.png"></td>
+    <td><img alt="Commercial_1" src="./resources/sub_class/Commercial/3.png"></td>
+    <td><img alt="Commercial_1" src="./resources/sub_class/Commercial/4.png"></td>
+    <td><img alt="Commercial_1" src="./resources/sub_class/Commercial/5.png"></td>
+  </tr>
+</table>
+
 
 ### 标签
 
