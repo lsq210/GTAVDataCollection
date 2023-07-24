@@ -1,6 +1,6 @@
 # GTAVDataCollection
 
-GTAVDataCollection is a mod to extract synthetic data from Grand Theft Auto V.  The data includes  photo-realistic computer images and annotations that can be used for the training of machine learning algorithms.
+[GTAVDataCollection](https://github.com/lsq210/GTAVDataCollection/) is a mod to extract synthetic data from Grand Theft Auto V.  The data includes  photo-realistic computer images and annotations that can be used for the training of machine learning algorithms.
 
 ![demo image](resources/bbox.jpg)
 
@@ -166,9 +166,10 @@ Each image has a corresponding label file. Here’s an example of a label struct
 
 ```text
 2048,1152
-X:-241.8259 Y:-2115.118 Z:150.1783,X:-89.97202 Y:-22.32331 Z:0
-0,288,245,359,310,Muscle,small-vehicle,High
-1,699,683,768,737,Sports,small-vehicle,High
+X:-420.2515 Y:-2069.219 Z:144.7112,X:-89.97202 Y:-70.18397 Z:0
+0,1120,255,1149,331,Sedans,small-vehicle,High
+1,1100,732,1126,796,Sedans,small-vehicle,High
+2,3,701,92,801,Commercial,large-vehicle,High
 ...
 ```
 
